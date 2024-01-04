@@ -1,0 +1,4 @@
+John Doe, 18, A
+Jane Smith, 19, B
+Alex Johnson, 17, C
+Eva Brown, 20, A+
