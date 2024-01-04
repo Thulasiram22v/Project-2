@@ -1,0 +1,62 @@
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        // Path to the text file containing student data
+        string filePath = "C:\\Users\\welcome\\Documents\\project-2\\student_data.txt";
+
+        // Read and display student data from the text file
+        DisplayStudentData(filePath);
+
+        Console.ReadLine(); // Keep console window open
+    }
+
+    static void DisplayStudentData(string filePath)
+    {
+        try
+        {
+            if (File.Exists(filePath))
+            {
+                // Read all lines from the text file
+                string[] lines = File.ReadAllLines(filePath);
+
+                // Display header
+                Console.WriteLine("Student Data:");
+
+                // Display each student's information
+                foreach (string line in lines)
+                {
+                    string[] data = line.Split(',');
+
+                    // Ensure the data array has at least three elements
+                    if (data.Length >= 3)
+                    {
+                        // Assuming the format is: Name, Age, Grade
+                        string name = data[0].Trim();
+                        int age = int.Parse(data[1].Trim());
+                        string grade = data[2].Trim();
+
+                        // Display student information
+                        Console.WriteLine($"Name: {name}, Age: {age}, Grade: {grade}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error: Invalid data format in line '{line}'. Skipping this line.");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Error: The file '{filePath}' does not exist. Please make sure the file is in the correct location.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+
+}
